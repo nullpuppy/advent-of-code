@@ -5,10 +5,10 @@
 /// and then basically do the same as in part 1.
 ///
 /// Number-words can overlap (i.e., oneight is 1 and 8)
-mod common;
+use utils::read_lines;
 
 fn main() {
-    let input = common::read_lines("input.txt").unwrap();
+    let input = read_lines("input.txt").unwrap();
     let d1b_ans = process(input);
     println!("Part 2: {}", d1b_ans);
 }
@@ -71,7 +71,7 @@ mod tests {
 
     #[test]
     fn part_two_sample_test() {
-        let input = common::read_lines("sample_two.txt").unwrap();
+        let input = read_lines("sample_two.txt").unwrap();
         assert_eq!(281, process(input));
     }
 }

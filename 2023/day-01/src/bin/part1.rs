@@ -4,10 +4,10 @@
 /// Parse input for numbers, concat first and last of each line to make a 2-digit
 /// number, and then sum all the numbers found
 
-mod common;
+use utils::read_lines;
 
 fn main() {
-    let input = common::read_lines("input.txt").unwrap();
+    let input = read_lines("input.txt").unwrap();
     let d1a_ans = process(input);
     println!("Part 1: {}", d1a_ans);
 }
@@ -35,7 +35,7 @@ mod tests {
 
     #[test]
     fn part_one_sample_test() {
-        let input = common::read_lines("sample_one.txt").unwrap();
+        let input = read_lines("sample_one.txt").unwrap();
         assert_eq!(142, process(input));
     }
 }
