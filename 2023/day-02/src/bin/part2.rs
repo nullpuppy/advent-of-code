@@ -1,9 +1,9 @@
+use utils::read_lines;
 mod common;
-
 use common::GameRule;
 
 fn main() {
-    let input = common::read_lines("input.txt").unwrap();
+    let input = read_lines("input.txt").unwrap();
     let d1b_ans = process(input);
     println!("Part 2: {}", d1b_ans);
 }
@@ -62,7 +62,7 @@ mod tests {
 
     #[test]
     fn part_one_sample_test() {
-        let input = common::read_lines("sample_one.txt").unwrap();
+        let input = read_lines("sample_one.txt").unwrap();
         assert_eq!(2286, process(input));
     }
 }
