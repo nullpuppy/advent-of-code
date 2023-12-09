@@ -1,0 +1,38 @@
+mod common;
+
+fn main() {
+    let input = common::read_lines("input.txt").unwrap();
+    let ans = process(input);
+    println!("Part 1: {}", ans);
+}
+
+fn process(input: impl Iterator<Item = String>) -> usize {
+    let mut sum = 0;
+
+    // track part numbers, and parts.
+    let (symbols, part_numbers) = common::parse_input(input);
+
+    // Iterate through the parts, and look to see if we can find an adjacent part number.
+    // for every adjacent part number, add part number to sum.
+    // we only want to add the part the first time it's found.
+    for symbol in symbols {
+        let found = symbol.adjacent_part_numbers(&part_numbers);
+
+        for part_num in found {
+            sum += part_num.num;
+        }
+    }
+
+    sum
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn part_one_sample_test() {
+        let input = common::read_lines("sample_one.txt").unwrap();
+        assert_eq!(4361, process(input));
+    }
+}
