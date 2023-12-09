@@ -1,7 +1,8 @@
+use utils::read_lines;
 mod common;
 
 fn main() {
-    let input = common::read_lines("input.txt").unwrap();
+    let input = read_lines("input.txt").unwrap();
     let ans = process(input);
     println!("Part 1: {}", ans);
 }
@@ -32,7 +33,7 @@ mod tests {
 
     #[test]
     fn part_one_sample_test() {
-        let input = common::read_lines("sample_one.txt").unwrap();
+        let input = read_lines("sample_one.txt").unwrap();
         assert_eq!(4361, process(input));
     }
 }

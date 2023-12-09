@@ -3,12 +3,13 @@
 
 use std::collections::{HashMap, HashSet};
 use regex::Regex;
-use crate::common::DesertMaps;
+use utils::read_lines;
 
 mod common;
+use common::DesertMaps;
 
 fn main() {
-    let input = common::read_lines("input.txt").expect("Unable to open input");
+    let input = read_lines("input.txt").expect("Unable to open input");
     let ans = process(input);
     println!("Part 1: {}", ans);
 }
@@ -118,7 +119,7 @@ mod tests {
 
     #[test]
     fn part_two_sample_test() {
-        let input = common::read_lines("sample_three.txt").expect("Unable to open sample text");
+        let input = read_lines("sample_three.txt").expect("Unable to open sample text");
         assert_eq!(6, process(input));
     }
 

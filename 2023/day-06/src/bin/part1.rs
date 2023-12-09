@@ -1,12 +1,12 @@
 #![allow(unused_imports)]
 #![allow(dead_code)]
-
-use crate::common::parse_line;
+use utils::read_lines;
 
 mod common;
+use common::parse_line;
 
 fn main() {
-    let input = common::read_lines("input.txt").expect("Unable to open input");
+    let input = read_lines("input.txt").expect("Unable to open input");
     let ans = process(input);
     println!("Part 1: {}", ans);
 }
@@ -47,7 +47,7 @@ mod tests {
 
     #[test]
     fn part_one_sample_test() {
-        let input = common::read_lines("sample.txt").expect("Unable to open sample text");
+        let input = read_lines("sample.txt").expect("Unable to open sample text");
         assert_eq!(288, process(input));
     }
 }

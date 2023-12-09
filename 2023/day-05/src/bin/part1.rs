@@ -6,13 +6,14 @@ use std::fs::File;
 use std::io::{self, BufReader, Lines};
 use itertools::Itertools;
 use core::array::IntoIter;
+use utils::read_lines;
 
 mod common;
 
 use common::Almanac;
 
 fn main() {
-    let mut input = common::read_lines("input.txt").unwrap();
+    let mut input = read_lines("input.txt").unwrap();
     let ans = process(&mut input);
     println!("Part 1: {}", ans);
 }
@@ -37,7 +38,7 @@ mod tests {
 
     #[test]
     fn part_one_sample_test() {
-        let mut input = common::read_lines("sample_one.txt").unwrap();
+        let mut input = read_lines("sample_one.txt").unwrap();
         // let input = input.map(|line| line.unwrap()).collect();
         assert_eq!(35, process(&mut input));
     }

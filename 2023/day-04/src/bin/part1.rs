@@ -2,14 +2,13 @@
 
 use regex::Regex;
 use std::collections::HashSet;
-use std::fs::File;
-use std::io::{self, Lines};
-use crate::common::string_to_numset;
+use utils::read_lines;
 
 mod common;
+use common::string_to_numset;
 
 fn main() {
-    let input = common::read_lines("input.txt").unwrap();
+    let input = read_lines("input.txt").unwrap();
     let ans = process(input);
     println!("Part 1: {}", ans);
 }
@@ -46,7 +45,7 @@ mod tests {
 
     #[test]
     fn part_one_sample_test() {
-        let input = common::read_lines("sample_one.txt").unwrap();
+        let input = read_lines("sample_one.txt").unwrap();
         assert_eq!(13, process(input));
     }
 }

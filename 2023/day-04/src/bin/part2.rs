@@ -1,9 +1,10 @@
 use std::collections::{HashMap, HashSet};
 use regex::Regex;
+use utils::read_lines;
 
 mod common;
 
-use common::{read_lines, string_to_numset};
+use common::string_to_numset;
 
 fn main() {
     let input = read_lines("input.txt").unwrap();
