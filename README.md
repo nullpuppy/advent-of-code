@@ -1,20 +1,13 @@
 # Advent of Code Solutions
 
-***
-
 ## What is Advent of Code?
-
-***
 
 [Advent of Code](https://adventofcode.com) is a yearly programming challenge that runs for the first 25
 days of December.
 
 This repository will hold my solutions.
 
-
 ## Solutions
-
-***
 
 ### [2023](https://adventofcode.com/2023)
 
