@@ -6,3 +6,15 @@ default-members = ["day-*"]
 
 [workspace.dependencies]
 utils = { path = "utils" }
+dhat = "0.3.2"
+tracing-subscriber = { version = "0.3.18", features = ["fmt", "env-filter"] }
+colored = "2.1.0"
+checked_clamp = "0.1.0"
+
+[profile.flamegraph]
+inherits = "release"
+debug = true
+
+[profile.dhat]
+inherits = "release"
+debug = 1
