@@ -16,10 +16,7 @@ pub enum Tile {
 
 impl Tile {
     pub fn is_bend(&self) -> bool {
-        match self {
-            Tile::NWBend | Tile::NEBend | Tile::SWBend | Tile::SEBend => true,
-            _ => false,
-        }
+        matches!(self, Tile::NWBend | Tile::NEBend | Tile::SWBend | Tile::SEBend)
     }
 
     pub fn can_connect(&self, t: &Tile, direction: Direction) -> bool {

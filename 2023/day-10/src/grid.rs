@@ -208,7 +208,7 @@ impl Grid {
         for i in 0..self.tiles[0].len() {
             print!("{}", i % 10);
         }
-        print!("\n");
+        println!();
         for (y, row) in self.tiles.iter().enumerate() {
             print!("{:3} ", y);
             for (x, t) in row.iter().enumerate() {
@@ -216,13 +216,11 @@ impl Grid {
                 if current == Some(&c) {
                     print!(
                         "{}",
-                        format!(
-                            "{}",
-                            match dir {
+                        (match dir {
                                 Some(d) => format!("{}", d),
                                 None => format!("{}", t),
                             }
-                        )
+                        ).to_string()
                         .green()
                     );
                 } else if loop_coords.contains(&c) {
@@ -246,8 +244,7 @@ impl Coord2d {
         let Some(nx) = (match dir {
             Direction::West => self.x.checked_sub(1),
             Direction::East => self.x.checked_add(1).and_then(|x| {
-                x.checked_clamp(0usize, bounds.width - 1)
-                    .map_or(None, |x| Some(x))
+                x.checked_clamp(0usize, bounds.width - 1).ok()
             }),
             _ => Some(self.x),
         }) else {
@@ -258,8 +255,7 @@ impl Coord2d {
         let Some(ny) = (match dir {
             Direction::North => self.y.checked_sub(1),
             Direction::South => self.y.checked_add(1).and_then(|y| {
-                y.checked_clamp(0usize, bounds.height - 1)
-                    .map_or(None, |y| Some(y))
+                y.checked_clamp(0usize, bounds.height - 1).ok()
             }),
             _ => Some(self.y),
         }) else {

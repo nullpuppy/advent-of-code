@@ -25,6 +25,7 @@ fn process(input: impl Iterator<Item = String>) -> usize {
     let mut grid = Grid::from_input(input);
     grid.isolate_loop(Tile::Ground);
     grid.flood_fill(Tile::Void);
+
     let mut contained = 0;
     for row in grid.tiles() {
         for tile in row {
@@ -34,7 +35,7 @@ fn process(input: impl Iterator<Item = String>) -> usize {
         }
     }
 
-    grid.print_debug(Some(&Coord2d::new(5, 5)), Some(&Direction::East));
+    // grid.print_debug(None, None);
     contained
 }
 
