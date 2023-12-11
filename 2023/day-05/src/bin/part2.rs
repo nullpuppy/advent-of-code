@@ -9,9 +9,7 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, BufReader, Lines};
 use utils::read_lines;
-
-mod common;
-use common::Almanac;
+use day_05::Almanac;
 
 fn main() {
     let mut input = read_lines("input.txt").unwrap();
@@ -20,7 +18,7 @@ fn main() {
 }
 
 fn process(input: &mut impl Iterator<Item = String>) -> usize {
-    let almanac = Almanac::from_iter(input);
+    let almanac = Almanac::from_input(input);
 
     for loc in 0..almanac.get_max_location() {
         let seed_from_loc = almanac.get_seed_for_location(loc);

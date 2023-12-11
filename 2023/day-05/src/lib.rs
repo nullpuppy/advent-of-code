@@ -4,14 +4,9 @@ pub fn parse_line_to_map<I>(line: &mut I) -> AlmanacEntry
 where
     I: Iterator<Item = String>,
 {
-    let name = line.next().unwrap();
+    line.next(); // consume name
 
     let mut entry = AlmanacEntry {
-        name: name
-            .split_whitespace()
-            .nth(0)
-            .unwrap_or_default()
-            .to_string(),
         map: vec![],
     };
 
@@ -40,7 +35,6 @@ pub struct Almanac {
 }
 
 pub struct AlmanacEntry {
-    name: String,
     map: Vec<Map>,
 }
 
@@ -102,12 +96,12 @@ impl AlmanacEntry {
 }
 
 impl Almanac {
-    pub fn from_iter(mut input: &mut impl Iterator<Item = String>) -> Self {
+    pub fn from_input(mut input: &mut impl Iterator<Item = String>) -> Self {
         // Parse vector of seeds to be planted
         let seeds: Vec<_> = input
             .next()
             .unwrap() // unwrap the option
-            .split_once(":")
+            .split_once(':')
             .unwrap()
             .1
             .split_whitespace()
@@ -140,9 +134,7 @@ impl Almanac {
         let light = self.water_light.get(water);
         let temp = self.light_temperature.get(light);
         let hum = self.temperature_humidity.get(temp);
-        let loc = self.humidity_location.get(hum);
-        // println!("Seed {seed} -> Soil: {soil} -> Fertilizer: {fert} -> Water {water} -> Light {light} -> Temperature {temp} -> Humidity {hum} -> Location {loc}");
-        loc
+        self.humidity_location.get(hum)
     }
 
     /// Look through the maps to find the seed for the requested location, but doing reverse lookups.
@@ -153,9 +145,7 @@ impl Almanac {
         let water = self.water_light.get_inverse(light);
         let fertilizer = self.fertilizer_water.get_inverse(water);
         let soil = self.soil_fertilizer.get_inverse(fertilizer);
-        let seed = self.seed_soil.get_inverse(soil);
-        // println!("Seed {seed} -> Soil: {soil} -> Fertilizer: {fert} -> Water {water} -> Light {light} -> Temperature {temp} -> Humidity {hum} -> Location {loc}");
-        seed
+        self.seed_soil.get_inverse(soil)
     }
 
     pub fn get_min_location(&self) -> usize {

@@ -1,6 +1,5 @@
 use utils::read_lines;
-mod common;
-use common::GameRule;
+use day_02::GameRule;
 
 fn main() {
     let input = read_lines("input.txt").unwrap();

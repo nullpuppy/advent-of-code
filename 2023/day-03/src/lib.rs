@@ -32,11 +32,11 @@ impl PartNumber {
 }
 
 impl PartSymbol {
-    pub fn adjacent_part_numbers(&self, part_numbers: &Vec<PartNumber>) -> HashSet<PartNumber> {
+    pub fn adjacent_part_numbers(&self, part_numbers: &[PartNumber]) -> HashSet<PartNumber> {
         part_numbers
             .iter()
             .filter_map(|part_num| {
-                if part_num.symbol_is_adjacent(&self) {
+                if part_num.symbol_is_adjacent(self) {
                     Some(part_num.clone())
                 } else {
                     None
@@ -55,7 +55,7 @@ pub fn parse_input(input: impl Iterator<Item = String>) -> (Vec<PartSymbol>, Vec
 
         for (col, ch) in line.chars().enumerate() {
             match ch {
-                ch if ch.is_digit(10) => {
+                ch if ch.is_ascii_digit() => {
                     num.push(ch);
                 }
                 _ => {
@@ -67,7 +67,7 @@ pub fn parse_input(input: impl Iterator<Item = String>) -> (Vec<PartSymbol>, Vec
                         }),
                         _ => {}
                     }
-                    if num.len() > 0 {
+                    if num.is_empty() {
                         // If we hit a non-digit, and have a number, save the number
                         // and reset our temp
                         numbers.push(PartNumber {
@@ -83,7 +83,7 @@ pub fn parse_input(input: impl Iterator<Item = String>) -> (Vec<PartSymbol>, Vec
         }
 
         // We might end the above loop with a number (number ends at EOL, not a non-digit char)
-        if num.len() > 0 {
+        if num.is_empty() {
             numbers.push(PartNumber {
                 num: num.parse::<usize>().unwrap(),
                 row,

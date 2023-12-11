@@ -50,7 +50,7 @@ impl GameRule {
         let id = iter
             .next()
             .unwrap()
-            .replace(":", "")
+            .replace(':', "")
             .parse::<usize>()
             .unwrap();
 
@@ -58,10 +58,10 @@ impl GameRule {
         let mut game_end = false;
         while let Some(next) = iter.next() {
             if let Ok(num) = next.parse::<usize>() {
-                let mut color = iter.next().unwrap().replace(",", "");
-                if color.ends_with(";") {
+                let mut color = iter.next().unwrap().replace(',', "");
+                if color.ends_with(';') {
                     game_end = true;
-                    color = color.to_string().replace(";", "");
+                    color = color.to_string().replace(';', "");
                 }
                 match color.as_str() {
                     "red" => {
@@ -97,7 +97,6 @@ impl GameRule {
             id,
             results,
             is_valid,
-            ..Game::default()
         }
     }
 }

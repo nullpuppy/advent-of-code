@@ -62,7 +62,7 @@ impl DesertMaps {
         &self.end_nodes
     }
 
-    pub fn step_count(&self, start_node: String, end_nodes: &Vec<String>) -> usize {
+    pub fn step_count(&self, start_node: String, end_nodes: &[String]) -> usize {
         let mut step = 0;
         let mut count = 0;
         let mut current = start_node;

@@ -1,5 +1,5 @@
 pub fn parse_line(line: String) -> Vec<usize> {
-    line.split_once(":")
+    line.split_once(':')
         .unwrap()
         .1
         .split_whitespace()

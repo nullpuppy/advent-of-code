@@ -1,10 +1,7 @@
 use regex::Regex;
 use std::collections::{HashMap, HashSet};
 use utils::read_lines;
-
-mod common;
-
-use common::string_to_numset;
+use day_04::string_to_numset;
 
 fn main() {
     let input = read_lines("input.txt").unwrap();
@@ -51,8 +48,7 @@ fn process(input: impl Iterator<Item = String>) -> usize {
     }
 
     card_copies
-        .into_iter()
-        .map(|(_, v)| v)
+        .into_values()
         .reduce(|l, r| l + r)
         .unwrap()
 }

@@ -16,7 +16,7 @@ fn main() {
 fn process(input: impl Iterator<Item = String>) -> u32 {
     let mut sum = 0;
 
-    let number_words = vec![
+    let number_words = [
         "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
     ];
     // for each line, find first and last digit
@@ -36,7 +36,7 @@ fn process(input: impl Iterator<Item = String>) -> u32 {
                     word = String::from(c);
                 } else {
                     loop {
-                        if word.len() == 0 {
+                        if word.is_ascii() {
                             break;
                         }
                         if !number_words.iter().any(|w| w.starts_with(word.as_str())) {

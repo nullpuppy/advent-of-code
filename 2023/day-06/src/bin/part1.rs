@@ -1,9 +1,7 @@
 #![allow(unused_imports)]
 #![allow(dead_code)]
 use utils::read_lines;
-
-mod common;
-use common::parse_line;
+use day_06::parse_line;
 
 fn main() {
     let input = read_lines("input.txt").expect("Unable to open input");

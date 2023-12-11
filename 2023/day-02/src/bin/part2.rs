@@ -1,6 +1,5 @@
 use utils::read_lines;
-mod common;
-use common::GameRule;
+use day_02::GameRule;
 
 fn main() {
     let input = read_lines("input.txt").unwrap();
@@ -28,9 +27,9 @@ fn process_game(game_str: String) -> GameRule {
 
     while let Some(next) = iter.next() {
         if let Ok(num) = next.parse::<usize>() {
-            let mut color = iter.next().unwrap().replace(",", "");
-            if color.ends_with(";") {
-                color = color.to_string().replace(";", "");
+            let mut color = iter.next().unwrap().replace(',', "");
+            if color.ends_with(';') {
+                color = color.to_string().replace(';', "");
             }
             match color.as_str() {
                 "red" => {

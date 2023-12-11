@@ -1,9 +1,5 @@
 use std::cmp::Ordering;
 use std::collections::HashMap;
-use std::fs::File;
-use std::io;
-use std::io::BufRead;
-use std::path::Path;
 
 #[derive(Debug, PartialOrd, PartialEq, Clone, Copy)]
 pub enum HandType {
@@ -43,7 +39,7 @@ pub struct Hand {
 
 impl Hand {
     pub fn new(input: String, use_jokers: bool) -> Self {
-        let split = input.split_once(" ").unwrap();
+        let split = input.split_once(' ').unwrap();
         let (cards, bid) = (split.0.to_string(), split.1.parse().unwrap());
         let cards = cards
             .chars()
@@ -69,17 +65,21 @@ impl Hand {
         self.bid
     }
 
-    pub fn cmp(&self, other: &Hand) -> Ordering {
+    pub fn compare(&self, other: &Hand) -> Ordering {
         if self.hand_type() > other.hand_type() {
             Ordering::Less
         } else if self.hand_type() < other.hand_type() {
             Ordering::Greater
         } else {
             for (card, other_card) in self.cards().iter().zip(other.cards().iter()) {
-                if card > other_card {
-                    return Ordering::Less;
-                } else if card < other_card {
-                    return Ordering::Greater;
+                match card.cmp(other_card) {
+                    Ordering::Greater => {
+                        return Ordering::Less
+                    },
+                    Ordering::Less => {
+                        return Ordering::Greater
+                    },
+                    _ => {},
                 }
             }
             Ordering::Equal
@@ -119,7 +119,7 @@ impl HandType {
 
         // Get a count of jokers in the hand. Jokers, for purposes of determining the type of hand
         // count as the card that will make the hand the best possible type
-        let sum_jokers = cards.get(&Card::Joker).unwrap_or(&0).clone();
+        let sum_jokers = *cards.get(&Card::Joker).unwrap_or(&0);
 
         if sum_jokers > 0 {
             cards.remove(&Card::Joker);
@@ -129,13 +129,13 @@ impl HandType {
         let max = *cards
             .iter()
             .max_by_key(|e| e.1)
-            .and_then(|e| Some(e.1))
+            .map(|e| e.1)
             .unwrap_or(&0)
             + sum_jokers;
         let min = *cards
             .iter()
             .min_by_key(|e| e.1)
-            .and_then(|e| Some(e.1))
+            .map(|e| e.1)
             .unwrap_or(&0);
 
         let min_sum = cards.iter().fold(0, |acc, e| {

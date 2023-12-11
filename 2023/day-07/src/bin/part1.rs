@@ -5,9 +5,7 @@ use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::ops::Add;
 use utils::read_lines;
-
-mod common;
-use common::{Card, Hand, HandType};
+use day_07::{Card, Hand, HandType};
 
 fn main() {
     let input = read_lines("input.txt").expect("Unable to open input");
@@ -18,7 +16,7 @@ fn main() {
 fn process(input: impl Iterator<Item = String>) -> usize {
     let mut hands: Vec<_> = input.map(|input| Hand::new(input, false)).collect();
 
-    hands.sort_by(Hand::cmp);
+    hands.sort_by(Hand::compare);
     hands
         .iter()
         .enumerate()

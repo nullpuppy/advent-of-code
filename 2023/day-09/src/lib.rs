@@ -3,7 +3,7 @@ pub struct OasisValue {
 }
 
 impl OasisValue {
-    pub fn from_string(s: &String, reverse: bool) -> Self {
+    pub fn from_string(s: &str, reverse: bool) -> Self {
         let mut seq: Vec<isize> = s
             .split_whitespace()
             .map(|s| s.parse::<isize>().unwrap())

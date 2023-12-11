@@ -4,9 +4,7 @@
 use regex::Regex;
 use std::collections::HashMap;
 use utils::read_lines;
-
-mod common;
-use common::DesertMaps;
+use day_08::DesertMaps;
 
 fn main() {
     let input = read_lines("input.txt").expect("Unable to open input");
@@ -17,7 +15,7 @@ fn main() {
 fn process(input: impl Iterator<Item = String>) -> usize {
     let map = DesertMaps::from_input(input);
 
-    map.step_count(String::from("AAA"), &vec![String::from("ZZZ")])
+    map.step_count(String::from("AAA"), &[String::from("ZZZ")])
 }
 
 #[cfg(test)]

@@ -4,9 +4,7 @@
 use regex::Regex;
 use std::collections::{HashMap, HashSet};
 use utils::read_lines;
-
-mod common;
-use common::DesertMaps;
+use day_08::DesertMaps;
 
 fn main() {
     let input = read_lines("input.txt").expect("Unable to open input");
@@ -35,12 +33,11 @@ fn process(input: impl Iterator<Item = String>) -> usize {
         .map(|f| HashSet::from_iter(f.iter()))
         .reduce(|l: HashSet<&usize>, r| {
             let intersection = l.intersection(&r);
-            HashSet::from_iter(intersection.into_iter().map(|v| *v))
+            HashSet::from_iter(intersection.into_iter().copied())
         })
         .iter()
         // Map so reduce below is less annoying. There's gotta be a better way to do this though
-        .map(|v| v.to_owned())
-        .flatten()
+        .flat_map(|v| v.to_owned())
         .collect::<Vec<_>>()
         .iter()
         .copied()

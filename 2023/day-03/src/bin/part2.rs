@@ -1,5 +1,5 @@
 use utils::read_lines;
-mod common;
+use day_03::parse_input;
 
 fn main() {
     let input = read_lines("input.txt").unwrap();
@@ -11,7 +11,7 @@ fn process(input: impl Iterator<Item = String>) -> usize {
     let mut sum = 0;
 
     // track part numbers, and parts.
-    let (symbols, part_numbers) = common::parse_input(input);
+    let (symbols, part_numbers) = parse_input(input);
 
     // Iterate through the parts, and look to see if we can find an adjacent part number.
     // for every adjacent part number, add part number to sum.
