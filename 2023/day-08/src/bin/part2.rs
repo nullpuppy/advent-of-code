@@ -1,8 +1,8 @@
 #![allow(unused_imports)]
 #![allow(dead_code)]
 
-use std::collections::{HashMap, HashSet};
 use regex::Regex;
+use std::collections::{HashMap, HashSet};
 use utils::read_lines;
 
 mod common;
@@ -24,10 +24,7 @@ fn process(input: impl Iterator<Item = String>) -> usize {
         .collect();
 
     // Get prime factors for each number
-    let factors: Vec<_> = steps
-        .iter()
-        .map(|n| prime_factors(*n))
-        .collect();
+    let factors: Vec<_> = steps.iter().map(|n| prime_factors(*n)).collect();
 
     // Find intersection of all prime factors. We should end up with at least
     // 1 value.
@@ -52,25 +49,19 @@ fn process(input: impl Iterator<Item = String>) -> usize {
         .reduce(|a, v| a * v)
         .unwrap_or(1);
 
-
     // Multiple non-prime factors together, and then multiply by shared prime factors once
     // at the end.
     // Somehow this works. Maths!
     factors
         .iter()
         .flatten()
-        .fold(1, |acc, v| {
-            if *v == intersection {
-                acc
-            } else {
-                acc * v
-            }
-        }) * intersection
+        .fold(1, |acc, v| if *v == intersection { acc } else { acc * v })
+        * intersection
 }
 
 fn prime_factors(mut num: usize) -> Vec<usize> {
     let mut factors = vec![];
-    for i in 2..=(num/2) {
+    for i in 2..=(num / 2) {
         while num % i == 0 {
             num /= i;
             factors.push(i);
@@ -83,19 +74,19 @@ fn prime_factors(mut num: usize) -> Vec<usize> {
     factors
 }
 
-fn get_steps(starting_node: String, maps: &HashMap<String, (String, String)>, pattern: &Vec<char>) -> usize {
+fn get_steps(
+    starting_node: String,
+    maps: &HashMap<String, (String, String)>,
+    pattern: &Vec<char>,
+) -> usize {
     let mut step = 0;
     let mut count = 0;
     let mut current = starting_node;
 
     loop {
         current = match pattern[step] {
-            'L' => {
-                maps[&current].0.to_owned()
-            },
-            'R' => {
-                maps[&current].1.to_owned()
-            },
+            'L' => maps[&current].0.to_owned(),
+            'R' => maps[&current].1.to_owned(),
             _ => unreachable!(),
         };
         count += 1;
@@ -125,7 +116,7 @@ mod tests {
 
     #[test]
     fn test_prime_factorization() {
-        let expected = vec![2,2,2];
+        let expected = vec![2, 2, 2];
         assert_eq!(expected, prime_factors(8));
 
         let expected = vec![3, 5];

@@ -28,7 +28,7 @@ fn process(mut input: impl Iterator<Item = String>) -> usize {
         for wait in 1..race_duration {
             // duration of wait == speed.
             // speed * duration remaining == distance.
-            if wait * (race_duration-wait) > winning_distance {
+            if wait * (race_duration - wait) > winning_distance {
                 margin += 1;
             }
         }

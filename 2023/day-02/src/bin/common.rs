@@ -32,11 +32,7 @@ impl Game {
 
 impl GameRule {
     pub fn new(red: usize, green: usize, blue: usize) -> Self {
-        Self {
-            red,
-            green,
-            blue,
-        }
+        Self { red, green, blue }
     }
 
     pub fn power(&self) -> usize {
@@ -49,8 +45,14 @@ impl GameRule {
 
         let mut iter = game_str.split_whitespace();
         iter.next(); // consume game
+
         // Parse game id.
-        let id = iter.next().unwrap().replace(":", "").parse::<usize>().unwrap();
+        let id = iter
+            .next()
+            .unwrap()
+            .replace(":", "")
+            .parse::<usize>()
+            .unwrap();
 
         let mut result = GameResult::default();
         let mut game_end = false;
@@ -68,20 +70,20 @@ impl GameRule {
                         if num > self.red {
                             is_valid = false;
                         };
-                    },
+                    }
                     "green" => {
                         result.green = num;
                         if num > self.green {
                             is_valid = false;
                         }
-                    },
+                    }
                     "blue" => {
                         result.blue = num;
                         if num > self.blue {
                             is_valid = false;
                         }
-                    },
-                    _ => {},
+                    }
+                    _ => {}
                 };
             }
             if game_end {

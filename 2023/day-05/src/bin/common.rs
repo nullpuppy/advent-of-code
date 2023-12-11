@@ -7,8 +7,12 @@ where
     let name = line.next().unwrap();
 
     let mut entry = AlmanacEntry {
-        name: name.split_whitespace().nth(0).unwrap_or_default().to_string(),
-        map: vec![]
+        name: name
+            .split_whitespace()
+            .nth(0)
+            .unwrap_or_default()
+            .to_string(),
+        map: vec![],
     };
 
     while let Some((dest_start, src_start, len)) = line
@@ -20,7 +24,6 @@ where
     {
         entry.map.push(Map::new(src_start, dest_start, len));
     }
-
 
     entry
 }
@@ -101,7 +104,8 @@ impl AlmanacEntry {
 impl Almanac {
     pub fn from_iter(mut input: &mut impl Iterator<Item = String>) -> Self {
         // Parse vector of seeds to be planted
-        let seeds: Vec<_> = input.next()
+        let seeds: Vec<_> = input
+            .next()
             .unwrap() // unwrap the option
             .split_once(":")
             .unwrap()
@@ -152,7 +156,6 @@ impl Almanac {
         let seed = self.seed_soil.get_inverse(soil);
         // println!("Seed {seed} -> Soil: {soil} -> Fertilizer: {fert} -> Water {water} -> Light {light} -> Temperature {temp} -> Humidity {hum} -> Location {loc}");
         seed
-
     }
 
     pub fn get_min_location(&self) -> usize {

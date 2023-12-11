@@ -1,11 +1,11 @@
 #![allow(unused_imports)]
 #![allow(dead_code)]
 
+use core::array::IntoIter;
+use itertools::Itertools;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, BufReader, Lines};
-use itertools::Itertools;
-use core::array::IntoIter;
 use utils::read_lines;
 
 mod common;

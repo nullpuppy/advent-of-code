@@ -8,7 +8,7 @@ use std::ops::Add;
 use utils::read_lines;
 
 mod common;
-use common::{Hand, HandType, Card};
+use common::{Card, Hand, HandType};
 
 fn main() {
     let input = read_lines("input.txt").expect("Unable to open input");
@@ -17,15 +17,13 @@ fn main() {
 }
 
 fn process(input: impl Iterator<Item = String>) -> usize {
-    let mut hands: Vec<_> = input
-        .map(|input| {
-            Hand::new(input, true)
-        }).collect();
+    let mut hands: Vec<_> = input.map(|input| Hand::new(input, true)).collect();
 
     hands.sort_by(Hand::cmp);
-    hands.iter()
+    hands
+        .iter()
         .enumerate()
-        .fold(0, |acc, (rank, hand)| acc + (rank+1) * hand.bid())
+        .fold(0, |acc, (rank, hand)| acc + (rank + 1) * hand.bid())
 }
 
 #[cfg(test)]

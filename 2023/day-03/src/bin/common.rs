@@ -46,7 +46,7 @@ impl PartSymbol {
     }
 }
 
-pub fn parse_input(input: impl Iterator<Item = String>) -> (Vec<PartSymbol >, Vec<PartNumber >) {
+pub fn parse_input(input: impl Iterator<Item = String>) -> (Vec<PartSymbol>, Vec<PartNumber>) {
     let mut numbers: Vec<PartNumber> = vec![];
     let mut symbols: Vec<PartSymbol> = vec![];
 

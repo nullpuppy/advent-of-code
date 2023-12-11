@@ -18,12 +18,12 @@ fn process(mut input: impl Iterator<Item = String>) -> usize {
     let mut delay = time / 2;
 
     // while distance traveled is winning, search backwards.
-    while delay * (time-delay) > distance {
+    while delay * (time - delay) > distance {
         delay -= delay / 2;
     }
 
     // delay now doesn't win, now find first occurrence that we wine
-    while delay * (time-delay) < distance {
+    while delay * (time - delay) < distance {
         delay += 1;
     }
 
@@ -33,7 +33,7 @@ fn process(mut input: impl Iterator<Item = String>) -> usize {
     delay = time;
 
     // delay now doesn't win.
-    while delay * (time-delay) < distance {
+    while delay * (time - delay) < distance {
         delay -= 1;
     }
 

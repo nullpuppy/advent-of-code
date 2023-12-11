@@ -3,11 +3,11 @@
 #![allow(unused_variables)]
 #![allow(dead_code)]
 
+use core::array::IntoIter;
+use itertools::Itertools;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, BufReader, Lines};
-use itertools::Itertools;
-use core::array::IntoIter;
 use utils::read_lines;
 
 mod common;
@@ -28,7 +28,7 @@ fn process(input: &mut impl Iterator<Item = String>) -> usize {
         for chunk in almanac.seeds().chunks(2) {
             let start = chunk[0];
             let len = chunk[1];
-            if seed_from_loc >= start && seed_from_loc < start+len {
+            if seed_from_loc >= start && seed_from_loc < start + len {
                 return loc;
             }
         }

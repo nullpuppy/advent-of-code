@@ -16,15 +16,13 @@ fn main() {
 }
 
 fn process(input: impl Iterator<Item = String>) -> usize {
-    let mut hands: Vec<_> = input
-        .map(|input| {
-            Hand::new(input, false)
-        }).collect();
+    let mut hands: Vec<_> = input.map(|input| Hand::new(input, false)).collect();
 
     hands.sort_by(Hand::cmp);
-    hands.iter()
+    hands
+        .iter()
         .enumerate()
-        .fold(0, |acc, (rank, hand)| acc + (rank+1) * hand.bid())
+        .fold(0, |acc, (rank, hand)| acc + (rank + 1) * hand.bid())
 }
 
 #[cfg(test)]

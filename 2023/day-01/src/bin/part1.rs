@@ -3,7 +3,6 @@
 /// Day 1, Part 1
 /// Parse input for numbers, concat first and last of each line to make a 2-digit
 /// number, and then sum all the numbers found
-
 use utils::read_lines;
 
 fn main() {

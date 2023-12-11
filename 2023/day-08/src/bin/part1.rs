@@ -1,8 +1,8 @@
 #![allow(unused_imports)]
 #![allow(dead_code)]
 
-use std::collections::HashMap;
 use regex::Regex;
+use std::collections::HashMap;
 use utils::read_lines;
 
 mod common;

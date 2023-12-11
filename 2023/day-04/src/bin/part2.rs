@@ -1,5 +1,5 @@
-use std::collections::{HashMap, HashSet};
 use regex::Regex;
+use std::collections::{HashMap, HashSet};
 use utils::read_lines;
 
 mod common;
@@ -11,7 +11,6 @@ fn main() {
     let ans = process(input);
     println!("Part 2: {}", ans);
 }
-
 
 fn process(input: impl Iterator<Item = String>) -> usize {
     let mut card_copies: HashMap<usize, usize> = HashMap::new();
@@ -40,7 +39,7 @@ fn process(input: impl Iterator<Item = String>) -> usize {
             // Previous "wins" will affect how many of the current card we should play.
             // for each copy, add the requisite number of subsequent cards.
             for _ in 0..card_copies[&card_num] {
-                for j in card_num+1..card_num+num_matching+1 {
+                for j in card_num + 1..card_num + num_matching + 1 {
                     if let Some(idx) = card_copies.get_mut(&j) {
                         *idx += 1;
                     } else {
@@ -51,7 +50,11 @@ fn process(input: impl Iterator<Item = String>) -> usize {
         }
     }
 
-    card_copies.into_iter().map(|(_, v)| v).reduce(|l, r| l + r).unwrap()
+    card_copies
+        .into_iter()
+        .map(|(_, v)| v)
+        .reduce(|l, r| l + r)
+        .unwrap()
 }
 
 #[cfg(test)]

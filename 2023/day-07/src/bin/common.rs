@@ -77,9 +77,9 @@ impl Hand {
         } else {
             for (card, other_card) in self.cards().iter().zip(other.cards().iter()) {
                 if card > other_card {
-                    return Ordering::Less
+                    return Ordering::Less;
                 } else if card < other_card {
-                    return Ordering::Greater
+                    return Ordering::Greater;
                 }
             }
             Ordering::Equal
@@ -114,17 +114,12 @@ impl HandType {
         let mut cards: HashMap<Card, usize> = HashMap::new();
 
         for c in hand {
-            *cards
-                .entry(c.clone())
-                .or_insert(0) += 1;
+            *cards.entry(c.clone()).or_insert(0) += 1;
         }
 
         // Get a count of jokers in the hand. Jokers, for purposes of determining the type of hand
         // count as the card that will make the hand the best possible type
-        let sum_jokers = cards
-            .get(&Card::Joker)
-            .unwrap_or(&0)
-            .clone();
+        let sum_jokers = cards.get(&Card::Joker).unwrap_or(&0).clone();
 
         if sum_jokers > 0 {
             cards.remove(&Card::Joker);
@@ -135,25 +130,24 @@ impl HandType {
             .iter()
             .max_by_key(|e| e.1)
             .and_then(|e| Some(e.1))
-            .unwrap_or(&0) + sum_jokers;
+            .unwrap_or(&0)
+            + sum_jokers;
         let min = *cards
             .iter()
             .min_by_key(|e| e.1)
             .and_then(|e| Some(e.1))
             .unwrap_or(&0);
 
-        let min_sum = cards
-            .iter()
-            .fold(0, |acc, e| {
-                // get a count of how many single cards we have
-                acc + {
-                    if *e.1 == 1 {
-                        1
-                    } else {
-                        0
-                    }
+        let min_sum = cards.iter().fold(0, |acc, e| {
+            // get a count of how many single cards we have
+            acc + {
+                if *e.1 == 1 {
+                    1
+                } else {
+                    0
                 }
-            }) as usize;
+            }
+        }) as usize;
 
         match max {
             1 => HandType::HighCard,

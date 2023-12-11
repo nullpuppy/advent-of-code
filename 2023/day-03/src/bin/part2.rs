@@ -20,7 +20,11 @@ fn process(input: impl Iterator<Item = String>) -> usize {
         let found = symbol.adjacent_part_numbers(&part_numbers);
 
         if found.len() == 2 {
-            sum += found.iter().map(|part_num| part_num.num).reduce(|l, r| l * r).unwrap();
+            sum += found
+                .iter()
+                .map(|part_num| part_num.num)
+                .reduce(|l, r| l * r)
+                .unwrap();
         }
     }
 
