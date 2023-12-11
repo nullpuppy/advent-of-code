@@ -1,15 +1,23 @@
-#![allow(unused_imports)]
-#![allow(dead_code)]
+use utils::read_lines;
+use {{day}}::*;
 
-mod common;
+#[cfg(feature = "dhat-heap")]
+#[global_allocator]
+static ALLOC: dhat::Alloc = dhat::Alloc;
 
 fn main() {
-    let input = common::read_lines("input.txt").expect("Unable to open input");
+    #[cfg(feature = "dhat-heap")]
+    let _profiler = dhat::Profiler::new_heap();
+
+    #[cfg(not(feature = "dhat-heap"))]
+    tracing_subscriber::fmt::init();
+
+    let input = read_lines("input.txt").expect("Unable to open input");
     let ans = process(input);
     println!("Part 1: {}", ans);
 }
 
-fn process(mut input: impl Iterator<Item = String>) -> usize {
+fn process(input: impl Iterator<Item = String>) -> usize {
 
     0
 }
@@ -20,7 +28,7 @@ mod tests {
 
     #[test]
     fn part_one_sample_test() {
-        let input = common::read_lines("sample_one.txt").expect("Unable to open sample text");
+        let input = read_lines("sample_one.txt").expect("Unable to open sample text");
         assert_eq!(0, process(input));
     }
 }

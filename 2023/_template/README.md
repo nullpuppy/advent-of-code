@@ -8,7 +8,7 @@ Base structure to quickly copy for each day's challenge.
 # Make a copy of this dir named for the day of the challenge
 cp -a _template day-XX
 # Fix the Cargo.toml project name.
-sed -i "s/{{project-name}}/day-XX" day-XX/Cargo.toml 
+sed -i "s/{{project-name}}/day-XX" day-XX/Cargo.toml
 ```
 
 Then edit `src/bin/part1.rs` for part 1, and `src/bin/part2.rs` for part 2.
