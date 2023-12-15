@@ -12,6 +12,7 @@ colored = "2.1.0"
 checked_clamp = "0.1.0"
 miette = { version = "5.10.0", features = ["fancy"] }
 thiserror = "1.0.50"
+regex = "1.10.2"
 
 [profile.flamegraph]
 inherits = "release"
